@@ -1,22 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-// TODO 24: Import useState hook
-// TODO 25: Destructure onAdd prop
-function AddTodoForm() {
-  // TODO 26: Create state for input value
+function AddTodoForm({ onAdd }) {
+  const [inputValue, setInputValue] = useState('')
   
-  // TODO 27: Create handleSubmit function
-  // - Prevent default form submission
-  // - Check if input is not empty
-  // - Call onAdd with input value
-  // - Clear input
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (inputValue.trim()) {
+      onAdd(inputValue)
+      setInputValue('')
+    }
+  }
   
   return (
-    <form onSubmit={''} className="todo-form"> /* TODO 28: attach handleSubmit */
+    <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
-        value={''} /* TODO 29: bind to state */
-        onChange={''} /* TODO 30: update state on change */
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
         placeholder="Enter a new todo"
         className="todo-input"
       />
